@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { countries } from '../data/countries.json';
+
+const eventStyles = {
+  foundation: 'bg-green-100 text-green-800 border-green-200',
+  development: 'bg-blue-100 text-blue-800 border-blue-200',
+  conflict: 'bg-red-100 text-red-800 border-red-200',
+  diplomacy: 'bg-red-100 text-yello-800 border-yello-200',
+  default: 'bg-gray-100 text-gray-800 border-gray-200'
+};
+
+const eventIcons = {
+  foundation: '🏛️',
+  development: '🏗️',
+  conflict: '⚔️',
+  diplomacy: '🤝',
+  default: '📜'
+};
+
+// フィルタリング用のスクリプト
+let searchQuery = '';
+const filteredCountries = () =>
+  countries.filter((country) =>
+    country.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+---
+<Layout title="国家一覧 - かろEarth Wiki">
+  <div class="flex">
+    <!-- サイドバー -->
+    <aside class="w-64 bg-gray-100 p-6 h-screen sticky top-0">
+      <h2 class="text-xl font-bold mb-4">国家一覧</h2>
+      <input
+        type="text"
+        placeholder="検索"
+        class="w-full p-2 mb-4 rounded border border-gray-300"
+        onInput={(e) => (searchQuery = e.target.value)}
+      />
+      <ul class="space-y-2">
+        {filteredCountries().map((country) => (
+          <li>
+            <a
+              href={`#${country.name}`}
+              class="block p-2 rounded hover:bg-gray-200"
+            >
+              {country.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+
+    <!-- メインコンテンツ -->
+    <main class="flex-1 p-8">
+      <div class="prose max-w-none">
+        <h1 class="text-4xl font-bold mb-8 text-center">国家一覧</h1>
+
+        <div class="space-y-12">
+          {filteredCountries().map((country) => (
+            <section
+              id={country.name}
+              class="bg-white p-8 rounded-lg shadow-lg"
+            >
+              <div class="border-b-2 border-gray-200 pb-6 mb-6">
+                <h2 class="text-3xl font-bold mb-4">{country.name}</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-3">
+                    <div>
+                      <span class="font-semibold">建国日：</span>
+                      <span class="font-serif">{country.foundedDate}</span>
+                    </div>
+                    <div>
+                      <span class="font-semibold">統治形態：</span>
+                      <span>{country.governmentType}</span>
+                    </div>
+                    <div>
+                      <span class="font-semibold">説明：</span>
+                      <p class="mt-2 pl-10">
+                        {country.features.split("\n").map((line, index) => (
+                          <>
+                            {line}
+                            {index < country.features.split("\n").length - 1 && <br />}
+                          </>
+                        ))}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div>
+                      <span class="font-semibold">座標：</span>
+                      <div class="font-mono bg-gray-100 p-2 rounded mt-1">
+                        X: {country.coordinates.x}
+                        Y: {country.coordinates.y}
+                        Z: {country.coordinates.z}
+                      </div>
+                    </div>
+                    <div>
+                      <span class="font-semibold">場所：</span>
+                      <p class="mt-1">{country.location}</p>
+                    </div>
+                    {
+                      country?.flag && <img src={`src/images/country/${country.flag}`} alt="Country Flag" />
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <!-- 国家の歴史 -->
+              <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">国家の歴史</h3>
+                <div class="max-w-4xl mx-auto">
+                  <div class="relative pl-8">
+                    <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+
+                    {country.history.map((event, index) => (
+                      <div class="relative mb-8">
+                        <div class="absolute -left-2.5 top-5 w-5 h-5 rounded-full bg-white border-4 border-gray-300"></div>
+                        <div
+                          class={`ml-8 p-6 rounded-lg border-2 ${
+                            eventStyles[event.type] || eventStyles.default
+                          }`}
+                        >
+                          <div class="flex items-center gap-3 mb-2">
+                            <span
+                              class="text-2xl"
+                              role="img"
+                              aria-label={event.type}
+                            >
+                              {eventIcons[event.type] || eventIcons.default}
+                            </span>
+                            <div>
+                              <h4 class="text-xl font-bold">{event.title}</h4>
+                              <p class="text-sm font-serif">{event.date}</p>
+                            </div>
+                          </div>
+                          <p class="mt-2 pl-10">
+                            {event.description.split("\n").map((line, index) => (
+                              <>
+                                {line}
+                                {index < event.description.split("\n").length - 1 && <br />}
+                              </>
+                            ))}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <!-- ランドマーク -->
+              <div>
+                <h3 class="text-2xl font-bold mb-6 text-center">主要建造物</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {country.landmarks.map((landmark) => (
+                    <div class="bg-gray-50 p-6 rounded-lg border-2 border-gray-100">
+                      <div class="flex items-center gap-3 mb-2">
+                        <span class="text-2xl">🏛️</span>
+                        <h4 class="text-xl font-bold">{landmark.name}</h4>
+                      </div>
+
+                      <div class="pl-10">
+                        <p class="text-gray-600">{landmark.description}</p>
+                        <span class="text-gray-600">座標：</span>
+                        <p class="font-mono bg-gray-100 p-2 rounded mt-1">
+                            X: {landmark.coordinates.x}
+                            Y: {landmark.coordinates.y}
+                            Z: {landmark.coordinates.z}
+                        </p>
+						            </span>
+                        <p class="text-sm text-gray-500 mt-2">
+                          完成日: <span class="font-serif">{landmark.completionDate}</span>
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

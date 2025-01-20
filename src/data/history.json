@@ -1,0 +1,52 @@
+{
+  "timeline": [
+    {
+      "id": "server-start",
+      "date": "2024-12-20",
+      "era": "Re:KaroEarth",
+      "title": "Re:KaroEarth開始",
+      "description": "Re:KaroEarthがスタート",
+      "type": "server",
+      "importance": "major"
+    }
+  ],
+  "majorEvents": [
+  ],
+  "eras": [
+    {
+      "id": "かろEarth Season 1",
+      "name": "かろEarth Season 1",
+      "startDate": "2023-08-22",
+      "endDate": "2024-01-23",
+      "description": "デバッグ効率が悪い為終了"
+    },
+    {
+      "id": "かろEarth Season 2",
+      "name": "かろEarth Season 2",
+      "startDate": "2024-07-9",
+      "endDate": "2024-07-28",
+      "description": "荒らしにより終了"
+    },
+    {
+      "id": "かろEarth Season 3",
+      "name": "かろEarth Season 3",
+      "startDate": "2024-07-30",
+      "endDate": "2024-08-6",
+      "description": "破壊神ららぁにより終了"
+    },
+    {
+      "id": "かろEarth Season 4",
+      "name": "かろEarth Season 4",
+      "startDate": "2024-08-11",
+      "endDate": "2024-09-1",
+      "description": "雷により崩壊"
+    },
+    {
+      "id": "Re:KaroEarth",
+      "name": "Re:KaroEarth",
+      "startDate": "2024-12-21 9:00",
+      "endDate": "",
+      "description": "リニューアルオープン"
+    }
+  ]
+}

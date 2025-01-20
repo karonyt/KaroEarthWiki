@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { organizations } from '../data/organizations.json';
+---
+
+<Layout title="組織一覧 - かろEarth Wiki">
+  <div class="flex">
+    <!-- サイドバー -->
+    <aside class="w-64 bg-gray-100 p-6 h-screen sticky top-0">
+      <h2 class="text-xl font-bold mb-4">組織一覧</h2>
+      <input
+        type="text"
+        placeholder="検索"
+        class="w-full p-2 mb-4 rounded border border-gray-300"
+        onInput={(e) => (searchQuery = e.target.value)}
+      />
+      <ul class="space-y-2">
+        {organizations.map((org) => (
+          <li>
+            <a
+              href={`#${org.name}`}
+              class="block p-2 rounded hover:bg-gray-200"
+            >
+              {org.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+
+    <main class="flex-1 p-8">
+      <div class="prose max-w-none">
+        <h1 class="text-4xl font-bold mb-8 text-center">組織一覧</h1>
+
+        <div class="space-y-12">
+          {organizations.map((org) => (
+            <section
+              id={org.name}
+              class="bg-white p-8 rounded-lg shadow-lg"
+            >
+              <div class="border-b-2 border-gray-200 pb-6 mb-6">
+                <h2 class="text-3xl font-bold mb-4">{org.name}</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-3">
+                    <div>
+                      <span class="font-semibold">設立日：</span>
+                      <span class="font-serif">{org.foundedDate}</span>
+                    </div>
+                    <div>
+                      <span class="font-semibold">本拠地：</span>
+                      <span>{org.headquarters}</span>
+                    </div>
+                    <div>
+                      <span class="font-semibold">活動内容：</span>
+                      <p class="mt-1">{org.activities}</p>
+                    </div>
+					<div>
+                        <span class="font-semibold">説明文：</span>
+                        <p class="mt-1">
+							{org.description.split("\n").map((line, index) => (
+    							<>
+      								{line}
+      								{index < org.description.split("\n").length - 1 && <br />}
+    							</>
+ 							))}
+						</p>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </section>
+          ))}
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

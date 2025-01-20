@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { timeline, majorEvents, eras } from '../data/history.json';
+
+// イベントタイプに応じたアイコンを定義
+const typeIcons = {
+  all: '📙',
+  server: '🖥️',
+  nation: '👑',
+  conflict: '⚔️',
+  diplomacy: '🤝',
+  default: '📜'
+};
+
+// 時代区分の色を定義
+const eraColors = {
+  '創設期': 'bg-amber-50 border-amber-200',
+  '動乱期': 'bg-rose-50 border-rose-200',
+  default: 'bg-gray-50 border-gray-200'
+};
+---
+
+<Layout title="歴史 - かろEarth Wiki">
+  <div class="prose max-w-none">
+    <h1 class="text-4xl font-bold mb-8 text-center">かろEarthの歴史</h1>
+
+    <div class="space-y-12">
+      <!-- 時代区分の概要 -->
+      <section class="bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-3xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">時代区分</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {eras.map((era) => (
+            <div class={`p-6 rounded-lg border-2 ${eraColors[era.name] || eraColors.default}`}>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold">{era.name}</h3>
+                <span class="text-sm text-gray-600 font-serif">
+                  {era.startDate} ～ {era.endDate}
+                </span>
+              </div>
+              <p class="text-gray-700 leading-relaxed">{era.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- イベントタイプ選択 -->
+      <section class="bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-3xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">種類で絞り込む</h2>
+        <div class="flex justify-center gap-4 mb-8">
+          {Object.keys(typeIcons).map((type) => (
+            <button
+              class={`px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors`}
+              data-type={type}
+              id={`filter-${type}`}
+            >
+              {typeIcons[type]} {type}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <!-- 年表 -->
+      <section class="bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-3xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">年表</h2>
+
+        <div class="max-w-4xl mx-auto" id="timeline-container">
+          {eras.map((era) => (
+            <div id={`era-${era.id}`} class="mb-12">
+              <div class="sticky top-4 z-10 bg-white shadow-sm">
+                <div class={`p-4 rounded-lg ${eraColors[era.name] || eraColors.default} mb-6`}>
+                  <h3 class="text-2xl font-bold text-center">{era.name}</h3>
+                  <p class="text-center text-sm text-gray-600 font-serif">
+                    {era.startDate} ～ {era.endDate}
+                  </p>
+                </div>
+              </div>
+
+              <div class="space-y-8" id={`era-${era.id}-events`}>
+                {timeline
+                  .filter(event => event.era === era.name)
+                  .map((event, index) => (
+                    <div class="relative" data-type={event.type}>
+                      <div class="absolute left-24 top-0 bottom-0 w-px bg-gray-200"></div>
+                      <div class="relative flex gap-8 group">
+                        <!-- 日付 -->
+                        <div class="w-48 flex-shrink-0 pt-2">
+                          <div class="text-lg font-serif text-gray-600 text-right pr-8">
+                            {event.date}
+                          </div>
+                        </div>
+
+                        <!-- イベント内容 -->
+                        <div class="flex-grow pb-8">
+                          <div class="relative">
+                            <!-- マーカー -->
+                            <div class="absolute -left-11 top-3 w-6 h-6 rounded-full bg-white border-4 border-gray-300 group-hover:border-gray-400 transition-colors"></div>
+                            
+                            <div class="bg-white border-2 border-gray-100 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+                              <div class="flex items-center gap-3 mb-3">
+                                <span class="text-2xl" role="img" aria-label={event.type}>
+                                  {typeIcons[event.type] || typeIcons.default}
+                                </span>
+                                <h4 class="text-xl font-bold">{event.title}</h4>
+                              </div>
+                              
+                              <div class="pl-10 space-y-2">
+                                <p class="text-gray-600 leading-relaxed">
+                                  {event.description.split("\n").map((line, index) => (
+                                    <>
+                                      {line}
+                                      {index < event.description.split("\n").length - 1 && <br />}
+                                    </>
+                                  ))}
+                                </p>
+                                {event.involvedParties && (
+                                  <p class="text-sm text-gray-500">
+                                    <span class="font-medium">関係国：</span>
+                                    {event.involvedParties.join('、')}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 重要な出来事 -->
+      <section class="bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-3xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">重要な出来事</h2>
+        <div class="max-w-4xl mx-auto space-y-8">
+          {majorEvents.map((event) => (
+            <article class="border-2 border-gray-100 rounded-lg p-6 hover:shadow-md transition-shadow">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-full">
+                  <span class="text-2xl">📖</span>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold">{event.title}</h3>
+                  <p class="text-gray-600 font-serif">{event.date}</p>
+                </div>
+              </div>
+              <div class="pl-20 space-y-3">
+                <p class="text-gray-700 leading-relaxed">{event.description}</p>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span class="font-medium">場所：</span>
+                    <span class="text-gray-600">{event.location}</span>
+                  </div>
+                  <div>
+                    <span class="font-medium">参加者：</span>
+                    <span class="text-gray-600">{event.participants.join('、')}</span>
+                  </div>
+                </div>
+                <div class="pt-2">
+                  <span class="font-medium">影響：</span>
+                  <p class="text-gray-600 mt-1">{event.impact}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // ページ読み込み後にイベントリスナーを追加
+    document.addEventListener('DOMContentLoaded', function () {
+      function filterEvents(event) {
+        const selectedType = event.target.dataset.type;
+        const timelineContainer = document.getElementById('timeline-container');
+        const events = timelineContainer.querySelectorAll('[data-type]');
+        
+        events.forEach((eventElement) => {
+          if (selectedType === 'all' || eventElement.dataset.type === selectedType) {
+            eventElement.style.display = 'block';
+          } else {
+            eventElement.style.display = 'none';
+          }
+        });
+      }
+
+      // ボタンにイベントリスナーを追加
+      const buttons = document.querySelectorAll('button[data-type]');
+      buttons.forEach((button) => {
+        button.addEventListener('click', filterEvents);
+      });
+    });
+  </script>
+</Layout>

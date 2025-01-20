@@ -1,0 +1,72 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="かろEarth マインクラフトサーバーのWiki" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<header class="bg-gray-800 text-white p-4">
+			<nav class="container mx-auto">
+				<div class="flex flex-col md:flex-row md:items-center md:justify-between">
+					<h1 class="text-2xl font-bold">
+						<a href="/">かろEarth Wiki</a>
+					</h1>
+					<ul class="flex flex-wrap gap-6 mt-4 md:mt-0">
+						<li><a href="/countries" class="hover:text-gray-300">国家</a></li>
+						<li><a href="/organizations" class="hover:text-gray-300">組織</a></li>
+						<li><a href="/history" class="hover:text-gray-300">歴史</a></li>
+						<li><a href="/people" class="hover:text-gray-300">有名人物</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<main class="container mx-auto p-4">
+			<slot />
+		</main>
+		<footer class="bg-gray-800 text-white p-4 mt-8">
+			<div class="container mx-auto text-center">
+				<p>&copy; 2024 かろEarth Wiki</p>
+			</div>
+		</footer>
+	</body>
+</html>
+<style is:global>
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	html {
+		font-family: system-ui, sans-serif;
+		background: #f6f6f6;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+</style>
