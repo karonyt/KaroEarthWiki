@@ -30,21 +30,20 @@ const eraColors = {
   		<meta property="og:type" content="website" />
   		<meta property="og:url" content="https://wiki.karoearth.xyz" />
   	  <meta property="og:image" content="https://wiki.karoearth.xyz/src/images/title.png" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 
-  <div class="prose max-w-none">
-    <h1 class="text-4xl font-bold mb-8 text-center">かろEarthの歴史</h1>
+  <div class="prose">
+    <h1 class="text-3xl font-bold mb-8 text-center">かろEarthの歴史</h1>
 
     <div class="space-y-12">
       <!-- 時代区分の概要 -->
       <section class="bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-3xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">時代区分</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">時代区分</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {eras.map((era) => (
             <div class={`p-6 rounded-lg border-2 ${eraColors[era.name] || eraColors.default}`}>
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-2xl font-bold">{era.name}</h3>
+                <h2 class="text-1xl font-bold">{era.name}</h3>
                 <span class="text-sm text-gray-600 font-serif">
                   {era.startDate} ～ {era.endDate}
                 </span>
@@ -57,11 +56,11 @@ const eraColors = {
 
       <!-- イベントタイプ選択 -->
       <section class="bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-3xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">種類で絞り込む</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">種類で絞り込む</h2>
         <div class="flex justify-center gap-4 mb-8">
           {Object.keys(typeIcons).map((type) => (
             <button
-              class={`px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors`}
+              class={`px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors`}
               data-type={type}
               id={`filter-${type}`}
             >
@@ -73,14 +72,14 @@ const eraColors = {
 
       <!-- 年表 -->
       <section class="bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-3xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">年表</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">年表</h2>
 
-        <div class="max-w-4xl mx-auto" id="timeline-container">
+        <div id="timeline-container">
           {eras.map((era) => (
             <div id={`era-${era.id}`} class="mb-12">
               <div class="sticky top-4 z-10 bg-white shadow-sm">
                 <div class={`p-4 rounded-lg ${eraColors[era.name] || eraColors.default} mb-6`}>
-                  <h3 class="text-2xl font-bold text-center">{era.name}</h3>
+                  <h3 class="text-1xl font-bold text-center">{era.name}</h3>
                   <p class="text-center text-sm text-gray-600 font-serif">
                     {era.startDate} ～ {era.endDate}
                   </p>
@@ -95,8 +94,8 @@ const eraColors = {
                       <div class="absolute left-24 top-0 bottom-0 w-px bg-gray-200"></div>
                       <div class="relative flex gap-8 group">
                         <!-- 日付 -->
-                        <div class="w-48 flex-shrink-0 pt-2">
-                          <div class="text-lg font-serif text-gray-600 text-right pr-8">
+                        <div class="w-30% flex-shrink-0 pt-2">
+                          <div class="text-lg font-serif text-gray-600 text-left pr-8">
                             {event.date}
                           </div>
                         </div>
@@ -109,10 +108,10 @@ const eraColors = {
                             
                             <div class="bg-white border-2 border-gray-100 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
                               <div class="flex items-center gap-3 mb-3">
-                                <span class="text-2xl" role="img" aria-label={event.type}>
+                                <span class="text-lg" role="img" aria-label={event.type}>
                                   {typeIcons[event.type] || typeIcons.default}
                                 </span>
-                                <h4 class="text-xl font-bold">{event.title}</h4>
+                                <h4 class="text-lg font-bold">{event.title}</h4>
                               </div>
                               
                               <div class="pl-10 space-y-2">
@@ -145,7 +144,7 @@ const eraColors = {
 
       <!-- 重要な出来事 -->
       <section class="bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-3xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">重要な出来事</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center border-b-2 border-gray-200 pb-4">重要な出来事</h2>
         <div class="max-w-4xl mx-auto space-y-8">
           {majorEvents.map((event) => (
             <article class="border-2 border-gray-100 rounded-lg p-6 hover:shadow-md transition-shadow">
@@ -207,3 +206,10 @@ const eraColors = {
     });
   </script>
 </Layout>
+
+<style>
+  .prose {
+    width: 105%;
+    font-size: 20px;
+  }
+</style>

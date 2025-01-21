@@ -13,10 +13,9 @@ import people from '../data/people.json';
   		<meta property="og:type" content="website" />
   		<meta property="og:url" content="https://wiki.karoearth.xyz" />
   	  <meta property="og:image" content="https://wiki.karoearth.xyz/src/images/title.png" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 
-  <div class="flex">
+  <div class="flex text-sm md:text-lg lg:text-xl">
     <!-- サイドバー -->
     <aside class="w-64 bg-gray-100 p-6 h-screen sticky top-0">
       <h2 class="text-xl font-bold mb-4">有名人物</h2>
@@ -86,3 +85,12 @@ import people from '../data/people.json';
     </main>
   </div>
 </Layout>
+
+<style>
+  main {
+    transform: scale(0.8);
+  }
+  aside {
+    transform: scale(0.8);
+  }
+</style>
