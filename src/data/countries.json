@@ -84,6 +84,21 @@
         }
       ],
       "landmarks": []
-    }    
+    },
+    {
+      "id": 1737709502945,
+      "name": "日本連合国",
+      "location": "日本列島を本土に世界中の大陸",
+      "foundedDate": "2025-01-09",
+      "governmentType": "国名上は連邦制",
+      "features": "日本連合国（英語（仮名）: Confederate States of Japan）は日本列島を中心に領土を所有しているかろEarthに存在している架空の連邦国家である。\n現実の関東に拠点を置いている国家である。\n英語名のConfederate States of Japanはアメリカ合衆国大統領が考えた仮名であることに留意が必要である。\n国のオーナー: 匿名",
+      "coordinates": {
+        "x": 14268,
+        "y": 70,
+        "z": 3690
+      },
+      "history": [],
+      "landmarks": []
+    }
   ]
 }
