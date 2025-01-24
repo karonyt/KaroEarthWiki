@@ -38,7 +38,6 @@
       "history": [],
       "landmarks": [],
       "flag": "1737410868622.png"
-
     },
     {
       "id": 1737410868634,
@@ -68,7 +67,7 @@
       "name": "セルビア共和国",
       "location": "旧ユーゴスラヴィアのところです",
       "foundedDate": "2024-12-18",
-      "governmentType": "帝王が統治する形態であるが、宰相などが帝王の家臣となり、それを流通させていくというのが統治形態",
+      "governmentType": "帝国制",
       "features": "かろearthを楽しみたい方に、おすすめのこの国、建築勢や、大臣系でも、努力したらなれる、そんな国です、もし入ってくれたら大歓迎です！！",
       "coordinates": {
         "x": 2150,
@@ -96,6 +95,52 @@
         "x": 14268,
         "y": 70,
         "z": 3690
+      },
+      "history": [],
+      "landmarks": []
+    },
+    {
+      "id": 1737716052951,
+      "name": "満洲国",
+      "location": "中国北部",
+      "foundedDate": "2024-12-21",
+      "governmentType": "帝政",
+      "features": "少人数で大国まで上がった国。\nアジアトップの国を目指してます",
+      "coordinates": {
+        "x": 13141,
+        "y": 81,
+        "z": -5313
+      },
+      "history": [],
+      "landmarks": []
+    },
+    {
+      "id": 1737717135366,
+      "name": "イスラエル",
+      "location": "西アジア :中東",
+      "foundedDate": "2025-01-12",
+      "governmentType": "共和制",
+      "features": "イスラエル(英語:Israel)(アラビア語إسرائيل)\nイスラエルは西アジアに位置する共和制国家です。\nアジアトップを目指す国です。\n大統領:akitoratora\n首相:kame902\n面積:22チャンク(1月24日)\n人口:3人(1月24日)",
+      "coordinates": {
+        "x": 3530,
+        "y": 68,
+        "z": -3180
+      },
+      "history": [],
+      "landmarks": [],
+      "flag": "1737717135366.png"
+    },
+    {
+      "id": 1737716967539,
+      "name": "アイスランド及びもねくん連合共和国",
+      "location": "アイスランド",
+      "foundedDate": "2024-12-21",
+      "governmentType": "連合共和制",
+      "features": "アイスランド及びもねくん連合共和国(English:The United Kingdom of Iceland and Monekun)は、アイスランドにある国家、国王はPer_(MCID:IkasUI6721),もねくん(MCID,monekunn)である。",
+      "coordinates": {
+        "x": -2241,
+        "y": 63,
+        "z": -6547
       },
       "history": [],
       "landmarks": []
